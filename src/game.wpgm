@@ -12,7 +12,32 @@ program farmville {
 	//  VISUALES
  	game.addVisualCharacter(hector)
  	game.addVisualIn(new Maiz(), game.at(1, 1))
- 	
+ 	game.addVisualIn(new Trigo(), game.at(5, 7))
+ 	game.addVisualIn(new Tomaco(), game.at(9, 1))
+ 	 	
+ 	keyboard.m().onPressDo { 
+		game.addVisualIn(new Maiz(), game.at(1, 5)) }
+	keyboard.t().onPressDo {
+		game.addVisualIn(new Trigo(), game.at(9, 8)) }
+	keyboard.o().onPressDo {
+		game.addVisualIn(new Tomaco(), game.at(4, 2)) }
+ 	 				
+ 	// REGAR
+ 	keyboard.r().onPressDo {
+ 		const objetos = game.getObjectsIn(hector.position())
+ 		const planta = objetos.find { o => o != hector }
+ 	 	planta.regar()
+ 	 	}
+ 	 
+ 	// COSECHAR
+ 	keyboard.c().onPressDo { 
+ 		const objetos = game.removeVisual(hector.position())
+ 		const planta = objetos.find { o => o != hector }
+		planta.cosechar()
+ 		
+ 	}	
+
  	//  COMIENZA
 	game.start()
-}
+	}
+
